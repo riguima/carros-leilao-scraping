@@ -4,7 +4,6 @@ import itertools
 import pandas as pd
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from httpx import AsyncClient
@@ -33,10 +32,7 @@ async def get_plates_of_year(year):
         ]
         for header in headers:
             result[header] = []
-        options = Options()
-        options.add_argument('--headless')
-        options.add_argument('--no-sandbox')
-        driver = Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        driver = Chrome(service=Service(ChromeDriverManager().install()))
         for c in itertools.count(1):
             while True:
                 try:
